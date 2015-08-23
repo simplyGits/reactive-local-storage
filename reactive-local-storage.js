@@ -21,6 +21,7 @@ ReactiveLocalStorage = (function () {
 
 		if (val !== undefined) {
 			localStorage[key] = val
+			deps[key].changed()
 		}
 
 		deps[key].depend()
