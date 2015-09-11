@@ -25,6 +25,12 @@ ReactiveLocalStorage = (function () {
 		}
 
 		deps[key].depend()
-		return JSON.parse(localStorage[key])
+
+		var res = localStorage[key]
+		try {
+			return JSON.parse(res)
+		} catch (e) {
+			return res
+		}
 	}
 })()
