@@ -14,14 +14,20 @@ ReactiveLocalStorage = (function () {
 		deps[event.key].changed()
 	})
 
-	return function (key, val) {
+	return function (key, val, rm) {
 		if (deps[key] === undefined) {
 			deps[key] = new Tracker.Dependency()
+		}
+		
+		if (rm === true) {
+			localStorage.removeItem(key);
+			deps[key].changed();
 		}
 
 		if (val !== undefined) {
 			localStorage[key] = JSON.stringify(val)
 			deps[key].changed()
+			return
 		}
 
 		deps[key].depend()
