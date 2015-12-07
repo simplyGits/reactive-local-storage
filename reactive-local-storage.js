@@ -1,30 +1,27 @@
 ReactiveLocalStorage = (function () {
 	'use strict'
-
 	var deps = {}
-	for (var i = 0; i < localStorage.length; i++) {
-		var key = localStorage.key(i)
-		deps[key] = new Tracker.Dependency()
-	}
 
-	window.addEventListener('storage', function (event) {
-		if (deps[event.key] === undefined) {
-			deps[event.key] = new Tracker.Dependency()
-		}
-		deps[event.key].changed()
-	})
-
-	return function (key, val) {
+	function getDep (key) {
 		if (deps[key] === undefined) {
 			deps[key] = new Tracker.Dependency()
 		}
+		return deps[key]
+	}
+
+	window.addEventListener('storage', function (event) {
+		getDep(event.key).changed()
+	})
+
+	var ReactiveLocalStorage = function (key, val) {
+		var dep = getDep(key)
 
 		if (val !== undefined) {
 			localStorage.setItem(key, EJSON.stringify(val))
-			deps[key].changed()
+			dep.changed()
 		}
 
-		deps[key].depend()
+		dep.depend()
 
 		var res = localStorage.getItem(key)
 		try {
@@ -33,4 +30,17 @@ ReactiveLocalStorage = (function () {
 			return res
 		}
 	}
+
+	ReactiveLocalStorage.removeItem = function (key) {
+		localStorage.removeItem(key)
+
+		var dep = getDep(key)
+		if (dep.hasDependents()) {
+			dep.changed()
+		} else {
+			delete deps[key]
+		}
+	}
+
+	return ReactiveLocalStorage
 })()
