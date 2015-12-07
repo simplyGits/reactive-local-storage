@@ -1,6 +1,6 @@
 Package.describe({
 	name: 'simply:reactive-local-storage',
-	version: '0.0.4',
+	version: '0.1.0',
 	summary: 'A reactive way to access localStorage.',
 	git: 'https://github.com/simplyGits/reactive-local-storage',
 	documentation: 'README.md',
