@@ -1,11 +1,6 @@
 ReactiveLocalStorage = (function () {
 	'use strict'
-
 	var deps = {}
-	for (var i = 0; i < localStorage.length; i++) {
-		var key = localStorage.key(i)
-		deps[key] = new Tracker.Dependency()
-	}
 
 	function getDep (key) {
 		if (deps[key] === undefined) {
