@@ -20,13 +20,13 @@ ReactiveLocalStorage = (function () {
 		}
 
 		if (val !== undefined) {
-			localStorage[key] = JSON.stringify(val)
+			localStorage.setItem(key, JSON.stringify(val))
 			deps[key].changed()
 		}
 
 		deps[key].depend()
 
-		var res = localStorage[key]
+		var res = localStorage.getItem(key)
 		try {
 			return JSON.parse(res)
 		} catch (e) {
