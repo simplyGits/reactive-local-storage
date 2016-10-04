@@ -1,10 +1,14 @@
-A reactive way to access localStorage.
+A reactive way to access `localStorage`.
+
+The API is the same as [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Storage).
 
 ```
 meteor add simply:reactive-local-storage
 ```
 
 ```javascript
+import * as RLocalStorage from 'meteor/simply:reactive-local-storage'
+
 Tracker.autorun(function () {
 	console.log(RLocalStorage.getItem('key')) // reactivly log localStorage['key'] to the console.
 })
