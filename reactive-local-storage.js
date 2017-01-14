@@ -37,6 +37,7 @@ export function setItem(key, val) {
 export function removeItem(key) {
 	localStorage.removeItem(key)
 	getDep(key).changed()
+	deps.delete(key)
 	countDep.changed()
 }
 export function count() {
