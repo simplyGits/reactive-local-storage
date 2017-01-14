@@ -1,6 +1,6 @@
 A reactive way to access `localStorage`.
 
-The API is the same as [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Storage).
+The API is the same as [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Storage), expect that `length` isn't included, use `count()` instead.
 
 ```
 meteor add simply:reactive-local-storage
