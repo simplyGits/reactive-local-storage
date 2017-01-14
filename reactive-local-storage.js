@@ -20,11 +20,11 @@ window.addEventListener('storage', function (event) {
 
 export function getItem(key) {
 	getDep(key).depend()
-	const res = localStorage.getItem(key)
+	const val = localStorage.getItem(key)
 	try {
-		return EJSON.parse(res)
+		return EJSON.parse(val)
 	} catch (e) {
-		return res
+		return val
 	}
 }
 export function setItem(key, val) {
