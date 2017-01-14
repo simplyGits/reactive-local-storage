@@ -48,3 +48,8 @@ export function key(n) {
 	countDep.depend()
 	return localStorage.key(n)
 }
+export function clear() {
+	for (let i = 0; i < localStorage.length; i++) {
+		removeItem(key(i))
+	}
+}
